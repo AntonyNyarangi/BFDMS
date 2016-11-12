@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mortality Form</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- jQuery UI -->
+	<link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
+
+	<!-- Bootstrap -->
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- styles -->
+	<link href="css/styles.css" rel="stylesheet">
+
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link href="vendors/form-helpers/css/bootstrap-formhelpers.min.css" rel="stylesheet">
+	<link href="vendors/select/bootstrap-select.min.css" rel="stylesheet">
+	<link href="vendors/tags/css/bootstrap-tags.css" rel="stylesheet">
+
+	<link href="css/forms.css" rel="stylesheet">
+	
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<!-- Logo -->
+					<div class="logo">
+						<h1><a href="fwDashboard.html">Farm Worker</a></h1>
+					</div>
+				</div>
+				<div class="col-md-5">
+
+				</div>
+				<div class="col-md-2">
+					<div class="navbar navbar-inverse" role="banner">
+						<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
+							<ul class="nav navbar-nav">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+									<ul class="dropdown-menu animated fadeInUp">
+										<li><a href="profile.html">Profile</a></li>
+										<li><a href="login.html">Logout</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="page-content">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="sidebar content-box" style="display: block;">
+					<ul class="nav">
+						<!-- Main menu -->
+						<li><a href="fwDashboard.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>						
+						<li class="submenu">
+							<a href="#">
+								<i class="glyphicon glyphicon-list"></i>Forms
+								<span class="caret pull-right"></span>
+							</a>
+							<!-- Sub menu -->
+							<ul>
+								<li><a href="mortality.html">Mortality</a></li>
+								<li><a href="feedConsumption.html">Feed Consumption</a></li>
+								<!--li><a href="weight.html">Weight</a></li-->
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="content-box-large">
+					<div class="panel-heading">
+						<div class="panel-title">Mortality Record, please fill all fields</div>
+					</div>
+					<div class="panel-body">
+						<form onsubmit="return validateNumberFields()" action ="mortality.php" method = "post" name = "mortality" required>
+							<fieldset>
+								<div class="form-group">
+									<label>Date NB: You can only enter today's date</label>
+									<input class ="form-control" id="datefield" type="date" name="date" max = "11" required>									
+								</div>
+								<div class="form-group">
+									<label>Number of Dead Birds</label>
+									<input class="form-control" type="text" name="number" required>
+								</div>								
+								<div class = "form-group">
+									<label>House</label>
+									<p>
+										<select class="selectpicker" name="house" required>
+											<option value="Hse1">Hse1</option>
+											<option value="Hse2">Hse2</option>
+											<option value="Hse3">Hse3</option>
+										</select>
+									</p>
+								</div>
+								<div class="form-group">
+									<label>Remarks</label>
+									<textarea class="form-control" rows="3" name="remark"></textarea>
+								</div>
+								
+							</fieldset>
+							<input type="submit" class = "btn btn-primary signup" value="Submit" ></tab>								
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<!-- jQuery UI -->
+		<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+
+		<script src="vendors/form-helpers/js/bootstrap-formhelpers.min.js"></script>
+
+		<script src="vendors/select/bootstrap-select.min.js"></script>
+
+		<script src="vendors/tags/js/bootstrap-tags.min.js"></script>
+
+		<script src="vendors/mask/jquery.maskedinput.min.js"></script>
+
+		<script src="vendors/moment/moment.min.js"></script>
+
+		<script src="vendors/wizard/jquery.bootstrap.wizard.min.js"></script>
+
+		<!-- bootstrap-datetimepicker -->
+		<link href="vendors/bootstrap-datetimepicker/datetimepicker.css" rel="stylesheet">
+		<script src="vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script> 
+
+
+		<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
+		<script src="js/custom.js"></script>
+		<script src="js/forms.js"></script>
+		<script>
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+			if(dd<10){
+				dd='0'+dd
+			} 
+			if(mm<10){
+				mm='0'+mm
+			} 
+
+			today = yyyy+'-'+mm+'-'+dd;
+			document.getElementById("datefield").setAttribute("max", today);
+			document.getElementById("datefield").setAttribute("min", today);
+			document.getElementById("datefield").setAttribute("value", today);
+		</script>
+		<script>
+			function validateNumberFields() {
+				var x = document.mortality.number.value;
+				if (/[^\d\.]/.test(x)) {
+					alert("Number of Dead Birds must be a number");
+					document.mortality.number.focus();
+					document.mortality.number.style.borderColor = "red";			
+					return false;			
+				}
+			}
+		</script>
+	</body>
+	</html>
