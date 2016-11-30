@@ -17,11 +17,6 @@ if ($con->connect_error){
 	$username = trim($_POST['username']);
 	$password = trim($_POST['password']);
 
-// <!if (empty($username)){
-// 	echo "Please enter your username";
-// }else if (empty($password)){
-// 	echo "Please enter your password";	
-// }else{
 	$sql ="SELECT FirstName, LastName, Username, Password,Category FROM Users WHERE username = '$username'";
 	$result = $con->query($sql);
 
@@ -33,13 +28,12 @@ if ($con->connect_error){
 			if ($row['Password'] != $password){
 				echo " Incorrect Password";
 			}else{
-				if ($row['Category'] == 'Admin'){
+				if ($row['Category'] == 'Manager'){
 					header('Location: index.html');
 				} else {
-					echo "you are not admin";
 					header('Location: fwDashboard.html');
 				}
-				
+
 			}
 		}
 	}else{

@@ -1,7 +1,41 @@
+<?php
+//create server and database connection constants
+$server = "localhost";
+$user = "root";
+$password = "48285";
+$database = "BroilerFarmManagementSystem";
+
+$con= new mysqli ($server,$user,$password, $database);
+
+//Check server connection
+if ($con->connect_error){
+  die ("Failed to establish DB connection:". $con->connect_error);
+}
+//receive  values from user form and trim white spaces
+$fname = trim($_POST['firstname']);
+$lname = trim($_POST['lastname']);
+$usrname = trim($_POST['username']);
+$category = trim($_POST['category']);
+$defaultPassword = 123456;
+
+//push values into db using query
+
+$sql = "INSERT INTO `Users` (`UserID`, `FirstName`, `LastName`, `Category`, `Username`, `Password`) VALUES (NULL, '$fname', '$lname', '$category', '$usrname', '$defaultPassword')";
+
+if ($con->query($sql)=== TRUE){
+  $successfulMsg = "User created";
+  echo "<script type = 'text/javascript'>alert('$successfulMsg');</script>";
+}else{
+  $errorMsg = "An error occured";
+  echo "Error: " . $sql . "<br>" . $con->error;
+  echo "<script type = 'text/javascript'>alert('$errorMsg');</script>";
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Manager's Dashboard</title>
+	<title>Create User</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap -->
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,16 +60,7 @@
 					</div>
 				</div>
 				<div class="col-md-5">
-					<!-- <div class="row">
-						<div class="col-lg-12">
-							<div class="input-group form">
-								<input type="text" class="form-control" placeholder="Search...">
-								<span class="input-group-btn">
-									<button class="btn btn-primary" type="button">Search</button>
-								</span>
-							</div>
-						</div>
-					</div> -->
+
 				</div>
 				<div class="col-md-2">
 					<div class="navbar navbar-inverse" role="banner">
@@ -102,101 +127,50 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-md-10">
-				<div class="row">
 
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="content-box-header">
-									<div class="panel-title">Mortality</div>
-								</div>
-								<div class="content-box-large box-with-header">
-									<canvas id="myChart" width="400" height="400"></canvas>
-									<script>
-									var ctx = document.getElementById("myChart");
-									var myChart = new Chart(ctx, {
-										type: 'bar',
-										data: {
-											labels: ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6"],
-											datasets: [{
-												label: '# of dead birds',
-												data: [6, 7, 6, 5, 2, 3],
-												backgroundColor: [
-													'red','red','red','red','red','red',],
-											}]
-										},
-										options: {
-											scales: {
-												yAxes: [{
-													ticks: {
-														beginAtZero:true
-													}
-												}]
-											}
-										}
-									});
-									</script>
-								</div>
-							</div>
-						</div>
+
+
+			<div class="col-md-6">
+				<div class="content-box-large">
+					<div class="panel-heading">
+						<div class="panel-title">New User Details</div>
 					</div>
-
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="content-box-header">
-									<div class="panel-title">Feed Consumption</div>
+					<div class="panel-body">
+						<form action ="createuser.php" method = "post" name = "newuser" required>
+							<fieldset>
+								<div class="form-group">
+									<label>First Name</label>
+									<input class ="form-control" type="text" name="firstname" required>
 								</div>
-								<div class="content-box-large box-with-header">
-									<canvas id="feedChart" width="400" height="400"></canvas>
-									<script>
-									var ctx = document.getElementById("feedChart");
-									var feedChart = new Chart(ctx, {
-										type: 'bar',
-										data: {
-											labels: ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6"],
-											datasets: [{
-												label: '# of bags consumed',
-												data: [4.5, 3, 3.5, 3.6, 3, 4],
-												backgroundColor: [
-													'green','green','green','green','green','green',],
-											}]
-										},
-										options: {
-											scales: {
-												yAxes: [{
-													ticks: {
-														beginAtZero:true
-													}
-												}]
-											}
-										}
-									});
-									</script>
+								<div class="form-group">
+									<label>Last Name</label>
+									<input class="form-control" type="text" name="lastname" required>
 								</div>
-							</div>
-						</div>
-
+								<div class="form-group">
+									<label>Username</label>
+									<input class="form-control" type="text" name="username" required>
+								</div>
+								<div class = "form-group">
+									<label>Category</label>
+									<p>
+										<select class="selectpicker" name="category" required>
+											<option value="Manager">Manager</option>
+											<option value="Worker">Worker</option>
+										</select>
+									</p>
+								</div>
+							</fieldset>
+							<input type="submit" class = "btn btn-primary signup" value="Create" ></tab>
+						</form>
 					</div>
 				</div>
-
-
-
-
 			</div>
+
+
 		</div>
 	</div>
 
-	<footer>
-		<div class="container">
 
-			<div class="copy text-center">
-				Copyright 2014 <a href='#'>Website</a>
-			</div>
-
-		</div>
-	</footer>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://code.jquery.com/jquery.js"></script>

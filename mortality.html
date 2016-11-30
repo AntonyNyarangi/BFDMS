@@ -17,7 +17,7 @@
 	<link href="vendors/tags/css/bootstrap-tags.css" rel="stylesheet">
 
 	<link href="css/forms.css" rel="stylesheet">
-	
+
 </head>
 <body>
 	<div class="header">
@@ -56,7 +56,7 @@
 				<div class="sidebar content-box" style="display: block;">
 					<ul class="nav">
 						<!-- Main menu -->
-						<li><a href="fwDashboard.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>						
+						<li><a href="fwDashboard.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
 						<li class="submenu">
 							<a href="#">
 								<i class="glyphicon glyphicon-list"></i>Forms
@@ -82,12 +82,12 @@
 							<fieldset>
 								<div class="form-group">
 									<label>Date NB: You can only enter today's date</label>
-									<input class ="form-control" id="datefield" type="date" name="date" max = "11" required>									
+									<input class ="form-control" id="datefield" type="date" name="date" max = "11" required>
 								</div>
 								<div class="form-group">
 									<label>Number of Dead Birds</label>
 									<input class="form-control" type="text" name="number" required>
-								</div>								
+								</div>
 								<div class = "form-group">
 									<label>House</label>
 									<p>
@@ -102,9 +102,9 @@
 									<label>Remarks</label>
 									<textarea class="form-control" rows="3" name="remark"></textarea>
 								</div>
-								
+
 							</fieldset>
-							<input type="submit" class = "btn btn-primary signup" value="Submit" ></tab>								
+							<input type="submit" class = "btn btn-primary signup" value="Submit" ></tab>
 						</form>
 					</div>
 				</div>
@@ -131,7 +131,7 @@
 
 		<!-- bootstrap-datetimepicker -->
 		<link href="vendors/bootstrap-datetimepicker/datetimepicker.css" rel="stylesheet">
-		<script src="vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script> 
+		<script src="vendors/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 
 
 		<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
@@ -146,10 +146,10 @@
 			var yyyy = today.getFullYear();
 			if(dd<10){
 				dd='0'+dd
-			} 
+			}
 			if(mm<10){
 				mm='0'+mm
-			} 
+			}
 
 			today = yyyy+'-'+mm+'-'+dd;
 			document.getElementById("datefield").setAttribute("max", today);
@@ -162,8 +162,8 @@
 				if (/[^\d\.]/.test(x)) {
 					alert("Number of Dead Birds must be a number");
 					document.mortality.number.focus();
-					document.mortality.number.style.borderColor = "red";			
-					return false;			
+					document.mortality.number.style.borderColor = "red";
+					return false;
 				}
 			}
 		</script>
