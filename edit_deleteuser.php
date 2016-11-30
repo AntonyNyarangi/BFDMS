@@ -1,3 +1,35 @@
+<?php
+//create server and database connection constants
+$server = "localhost";
+$user = "root";
+$password = "48285";
+$database = "BroilerFarmManagementSystem";
+
+$con= new mysqli ($server,$user,$password, $database);
+
+//Check server connection
+if ($con->connect_error){
+  die ("Failed to establish DB connection:". $con->connect_error);
+}
+//receive  values from user form and trim white spaces
+$userID = trim($_POST['userID']);
+
+//push values into db using query
+
+$sql = "DELETE FROM `Users` WHERE `UserID` = $userID";
+
+if ($con->query($sql)=== TRUE){
+  $successfulMsg = "User deleted";
+  echo "<script type = 'text/javascript'>alert('$successfulMsg');</script>";
+}else{
+  $errorMsg = "An error occured";
+  echo "Error: " . $sql . "<br>" . $con->error;
+  echo "<script type = 'text/javascript'>alert('$errorMsg');</script>";
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,7 +160,7 @@
                       die ("Failed to establish DB connection:". $con->connect_error);
                     }
 
-                    $result = $con->query("SELECT `FirstName`, `LastName`, `Category`, `Username` FROM Users");
+                    $result = $con->query("SELECT `UserID`,`FirstName`, `LastName`, `Category`, `Username` FROM Users");
 
                     while($row = $result->fetch_assoc()){
                       echo "<tr>";
@@ -137,9 +169,9 @@
                       echo "<td>".$row['Category']."</td>"; ?>
                       <td>
                         <form method="post" action="edit_deleteuser.php">
-                          <input type="submit" name="action" value="Edit"/>
-                          <input type="submit" name="action" value="Delete"/>
-                          <input type="hidden" name="id" value="<?php echo $row['id']; ?>"/>
+                          <input type="submit" name="modifyusers" value="Edit"/>
+                          <input type="submit" name="modifyusers" value="Delete"/>
+                          <input type="text" name="userID" value="<?php echo $row['UserID']; ?>"/>
                         </form>
                       </td>
                       <?php

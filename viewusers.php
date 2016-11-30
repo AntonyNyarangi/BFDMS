@@ -128,7 +128,7 @@
                       die ("Failed to establish DB connection:". $con->connect_error);
                     }
 
-                    $result = $con->query("SELECT `FirstName`, `LastName`, `Category`, `Username` FROM Users");
+                    $result = $con->query("SELECT `UserID`,`FirstName`, `LastName`, `Category`, `Username` FROM Users");
 
                     while($row = $result->fetch_assoc()){
                       echo "<tr>";
@@ -139,7 +139,7 @@
                         <form method="post" action="edit_deleteuser.php">
                           <input type="submit" name="modifyusers" value="Edit"/>
                           <input type="submit" name="modifyusers" value="Delete"/>
-                          <input type="hidden" name="id" value="<?php echo $row['id']; ?>"/>
+                          <input type="text" name="userID" value="<?php echo $row['UserID']; ?>"/>
                         </form>
                       </td>
                       <?php
