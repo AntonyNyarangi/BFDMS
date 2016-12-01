@@ -139,13 +139,21 @@
                         <form method="post" action="edit_deleteuser.php">
                           <input type="submit" name="modifyusers" value="Edit"/>
                           <input type="submit" name="modifyusers" value="Delete"/>
-                          <input type="text" name="userID" value="<?php echo $row['UserID']; ?>"/>
+                          <input type="hidden" name="userID" value="<?php echo $row['UserID']; ?>"/>
                         </form>
+
                       </td>
                       <?php
                       echo "</tr>";
                     }
                     ?>
+                    <tr>
+                      <td>
+                        <form method="post" action="createUser.html">
+                          <input type="submit" name="newuser" value="New"/>
+                        </form>
+                      </td>
+                    </tr>
 
                   </tbody>
                 </table>
