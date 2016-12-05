@@ -109,14 +109,19 @@
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Username</th>
                       <th>Role</th>
+                      <th>Username</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
 
                     <?php
+                    if(isset($_GET['Message'])){
+                      ?>
+                      <div id='alert'><div class=' alert alert-block alert-info fade in center'><?php echo $_GET['Message']?></div></div>
+                      <?php
+                    }
                     $server = "localhost";
                     $user = "root";
                     $password = "48285";
@@ -133,8 +138,9 @@
                     while($row = $result->fetch_assoc()){
                       echo "<tr>";
                       echo "<td>".$row['FirstName']. " ".$row['LastName']."</td>";
+                      echo "<td>".$row['Category']."</td>";
                       echo "<td>".$row['Username']."</td>";
-                      echo "<td>".$row['Category']."</td>"; ?>
+                      ?>
                       <td>
                         <form method="post" action="edit_deleteuser.php">
                           <input type="submit" name="modifyusers" value="Edit"/>

@@ -26,5 +26,6 @@ if ($con->query($sql)=== TRUE){
   echo "Error: " . $sql . "<br>" . $con->error;
   echo "<script type = 'text/javascript'>alert('$errorMsg');</script>";
 }
-header('Location: viewusers.php');
+$successfulMsg = "User deleted";
+header("Location:viewusers.php?Message=".$successfulMsg);
 ?>

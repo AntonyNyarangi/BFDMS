@@ -26,20 +26,16 @@ $result = $con->query($sqlcheck);
 if($result->num_rows > 0){
   $row = $result->fetch_assoc();
   $userexistserror = "That username is taken";
-  header('Location: createUser.html');
-  echo "That username is taken";
+  header('Location: createUser.html?Message='.$userexistserror);
   $UserID = $row['UserID'];
 }else{
   $sqlinsert = "INSERT INTO `Users` (`UserID`, `FirstName`, `LastName`, `Category`, `Username`, `Password`) VALUES (NULL, '$fname', '$lname', '$category', '$usrname', '$defaultPassword')";
   if ($con->query($sqlinsert)=== TRUE){
     $successfulMsg = "User created";
-    echo "<script type = 'text/javascript'>alert('$successfulMsg');</script>";
-    header('Location: viewusers.php');
+    header("Location:viewusers.php?Message=".$successfulMsg);
   }else{
     $errorMsg = "An error occured";
-    echo "Error: " . $sqlinsert . "<br>" . $con->error;
-    echo "<script type = 'text/javascript'>alert('$errorMsg');</script>";
-    header('Location: createuser.php');
+    header("Location: createuser.php?Message=".$errorMsg);
   }
 }
 
