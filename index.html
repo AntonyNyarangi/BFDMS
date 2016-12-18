@@ -51,6 +51,18 @@
 						<li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
 
 						<li class="submenu">
+              <a href="#">
+                <i class="glyphicon glyphicon-list"></i> Broods
+                <span class="caret pull-right"></span>
+              </a>
+              <!-- Sub menu -->
+              <ul>
+                <li><a href="viewbroods.php">View Broods</a></li>
+                <li><a href="newbrood.html">New Brood</a></li>
+              </ul>
+            </li>
+
+						<li class="submenu">
 							<a href="#">
 								<i class="glyphicon glyphicon-list"></i> Users
 								<span class="caret pull-right"></span>
@@ -113,7 +125,7 @@
 									<div class="panel-title">Calendar of Events</div>
 									<!-- </div> -->
 									<div class="panel-body">
-										<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;height=500&amp;wkst=1&amp;bgcolor=%23cccccc&amp;src=4npjbk00ff85he8ra7qjijgh0o%40group.calendar.google.com&amp;color=%23060D5E&amp;ctz=Africa%2FNairobi" style="border-width:0" width="1000" height="400" frameborder="0" scrolling="no"></iframe>
+										<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;height=500&amp;wkst=1&amp;bgcolor=%23cccccc&amp;src=4npjbk00ff85he8ra7qjijgh0o%40group.calendar.google.com&amp;color=%23060D5E&amp;ctz=Africa%2FNairobi" style="border-width:2px " width="1000" height="400" frameborder="0" scrolling="no"></iframe>
 									</div>
 								</div>
 							</div>
@@ -123,34 +135,14 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="content-box-header">
-									<div class="panel-title">Mortality, Last 7 days</div>
+									<div class="panel-title">Mortality</div>
 								</div>
 								<div class="content-box-large box-with-header">
-									<canvas id="myChart" width="400" height="100"></canvas>
-									<script>
-									var ctx = document.getElementById("myChart");
-									var myChart = new Chart(ctx, {
-										type: 'bar',
-										data: {
-											labels: ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6"],
-											datasets: [{
-												label: '# of dead birds',
-												data: [6, 7, 6, 5, 2, 3],
-												backgroundColor: [
-													'red','red','red','red','red','red',],
-												}]
-											},
-											options: {
-												scales: {
-													yAxes: [{
-														ticks: {
-															beginAtZero:true
-														}
-													}]
-												}
-											}
-										});
-										</script>
+
+									<div id="chart-container">
+										<canvas id="mortalitycanvas"></canvas>
+									</div>
+
 									</div>
 								</div>
 							</div>
@@ -160,34 +152,12 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="content-box-header">
-										<div class="panel-title">Feed Consumption, Last 7 days</div>
+										<div class="panel-title">Feed Consumption</div>
 									</div>
 									<div class="content-box-large box-with-header">
-										<canvas id="feedChart" width="400" height="100"></canvas>
-										<script>
-										var ctx = document.getElementById("feedChart");
-										var feedChart = new Chart(ctx, {
-											type: 'bar',
-											data: {
-												labels: ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6"],
-												datasets: [{
-													label: '# of bags consumed',
-													data: [4.5, 3, 3.5, 3.6, 3, 4],
-													backgroundColor: [
-														'green','green','green','green','green','green',],
-													}]
-												},
-												options: {
-													scales: {
-														yAxes: [{
-															ticks: {
-																beginAtZero:true
-															}
-														}]
-													}
-												}
-											});
-											</script>
+										<div id="chart-container">
+	              			<canvas id="feedconsumptioncanvas"></canvas>
+	              		</div>
 										</div>
 									</div>
 								</div>
@@ -211,5 +181,10 @@
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<script src="js/custom.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/Chart.min.js"></script>
+		<script type="text/javascript" src="js/mortalityGraph.js"></script>
+		<script type="text/javascript" src="js/feedconsumptiongraph.js"></script>
+
 	</body>
 	</html>

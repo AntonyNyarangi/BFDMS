@@ -57,6 +57,18 @@
 
             <li class="submenu">
               <a href="#">
+                <i class="glyphicon glyphicon-list"></i> Broods
+                <span class="caret pull-right"></span>
+              </a>
+              <!-- Sub menu -->
+              <ul>
+                <li><a href="viewbroods.php">View Broods</a></li>
+                <li><a href="newbrood.html">New Brood</a></li>
+              </ul>
+            </li>
+
+            <li class="submenu">
+              <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Users
                 <span class="caret pull-right"></span>
               </a>
@@ -78,7 +90,7 @@
 								<li><a href="newhouse.html">New House</a></li>
 							</ul>
 						</li>
-            
+
             <li class="submenu">
               <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Reports
@@ -116,31 +128,11 @@
                   <div class="panel-title">Mortality</div>
                 </div>
                 <div class="content-box-large box-with-header">
-                  <canvas id="myChart" width="400" height="400"></canvas>
-                  <script>
-                  var ctx = document.getElementById("myChart");
-                  var myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                      labels: ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6"],
-                      datasets: [{
-                        label: '# of dead birds',
-                        data: [6, 7, 6, 5, 2, 3],
-                        backgroundColor: [
-                          'red','red','red','red','red','red',],
-                        }]
-                      },
-                      options: {
-                        scales: {
-                          yAxes: [{
-                            ticks: {
-                              beginAtZero:true
-                            }
-                          }]
-                        }
-                      }
-                    });
-                    </script>
+
+                  <div id="chart-container">
+              			<canvas id="mortalitycanvas"></canvas>
+              		</div>
+
                   </div>
                 </div>
               </div>
@@ -195,20 +187,13 @@
       </div>
     </div>
 
-    <footer>
-      <div class="container">
-
-        <div class="copy text-center">
-          Copyright 2014 <a href='#'>Website</a>
-        </div>
-
-      </div>
-    </footer>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/Chart.min.js"></script>
+    <script type="text/javascript" src="js/mortalityGraph.js"></script>
   </body>
   </html>

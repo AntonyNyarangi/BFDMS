@@ -57,6 +57,18 @@
 
             <li class="submenu">
               <a href="#">
+                <i class="glyphicon glyphicon-list"></i> Broods
+                <span class="caret pull-right"></span>
+              </a>
+              <!-- Sub menu -->
+              <ul>
+                <li><a href="viewbroods.php">View Broods</a></li>
+                <li><a href="newbrood.html">New Brood</a></li>
+              </ul>
+            </li>
+
+            <li class="submenu">
+              <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Users
                 <span class="caret pull-right"></span>
               </a>

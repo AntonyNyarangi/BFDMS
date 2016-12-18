@@ -375,6 +375,7 @@ footer .copy{
 
 .login-bg {
   background: rgba(255, 255, 255, 0);
+  /*background-image: url("Broilers.jpg");*/
   background: -webkit-linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
   background: -moz-linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
   background: -ms-linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
@@ -481,10 +482,7 @@ body {
 }
 
 
-.login-wrapper .box .social{
-  margin: 0 auto;
-  width: 90%;
-}
+
 .login-wrapper .box .social a.face_login{
   background: #6887c4;
   background: -moz-linear-gradient(top, #6887c4 0%, #4566a9 100%);

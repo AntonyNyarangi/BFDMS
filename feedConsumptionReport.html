@@ -56,6 +56,18 @@
 						<li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
 
 						<li class="submenu">
+              <a href="#">
+                <i class="glyphicon glyphicon-list"></i> Broods
+                <span class="caret pull-right"></span>
+              </a>
+              <!-- Sub menu -->
+              <ul>
+                <li><a href="viewbroods.php">View Broods</a></li>
+                <li><a href="newbrood.html">New Brood</a></li>
+              </ul>
+            </li>
+
+						<li class="submenu">
 							<a href="#">
 								<i class="glyphicon glyphicon-list"></i> Users
 								<span class="caret pull-right"></span>
@@ -116,41 +128,12 @@
 									<div class="panel-title">Feed Consumption</div>
 								</div>
 								<div class="content-box-large box-with-header">
-									<canvas id="feedChart" width="400" height="400"></canvas>
-									<script>
-									var ctx = document.getElementById("feedChart");
-									var feedChart = new Chart(ctx, {
-										type: 'bar',
-										data: {
-											labels: ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6"],
-											datasets: [{
-												label: '# of bags consumed',
-												data: [4.5, 3, 3.5, 3.6, 3, 4],
-												backgroundColor: [
-													'green','green','green','green','green','green',
-												],
-												// borderColor: [
-												// 	'rgba(255,99,132,1)',
-												// 	'rgba(54, 162, 235, 1)',
-												// 	'rgba(255, 206, 86, 1)',
-												// 	'rgba(75, 192, 192, 1)',
-												// 	'rgba(153, 102, 255, 1)',
-												// 	'rgba(255, 159, 64, 1)'
-												// ],
-												borderWidth: 1
-											}]
-										},
-										options: {
-											scales: {
-												yAxes: [{
-													ticks: {
-														beginAtZero:true
-													}
-												}]
-											}
-										}
-									});
-									</script>
+
+									<div id="chart-container">
+										<canvas id="feedconsumptioncanvas"></canvas>
+									</div>
+
+
 								</div>
 							</div>
 						</div>
@@ -164,20 +147,14 @@
 		</div>
 	</div>
 
-	<footer>
-		<div class="container">
-
-			<div class="copy text-center">
-				Copyright 2014 <a href='#'>Website</a>
-			</div>
-
-		</div>
-	</footer>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="js/custom.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/Chart.min.js"></script>
+	<script type="text/javascript" src="js/feedconsumptiongraph.js"></script>
 </body>
 </html>
