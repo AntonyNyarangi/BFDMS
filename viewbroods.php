@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Users</title>
+  <title>Broods</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,6 +57,18 @@
 
             <li class="submenu">
               <a href="#">
+                <i class="glyphicon glyphicon-list"></i> Broods
+                <span class="caret pull-right"></span>
+              </a>
+              <!-- Sub menu -->
+              <ul>
+                <li><a href="viewbroods.php">View Broods</a></li>
+                <li><a href="newbrood.html">New Brood</a></li>
+              </ul>
+            </li>
+
+            <li class="submenu">
+              <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Users
                 <span class="caret pull-right"></span>
               </a>
@@ -68,16 +80,16 @@
             </li>
 
             <li class="submenu">
-							<a href="#">
-								<i class="glyphicon glyphicon-list"></i> Houses
-								<span class="caret pull-right"></span>
-							</a>
-							<!-- Sub menu -->
-							<ul>
-								<li><a href="viewhouses.php">View Houses</a></li>
-								<li><a href="newhouse.html">New House</a></li>
-							</ul>
-						</li>
+              <a href="#">
+                <i class="glyphicon glyphicon-list"></i> Houses
+                <span class="caret pull-right"></span>
+              </a>
+              <!-- Sub menu -->
+              <ul>
+                <li><a href="viewhouses.php">View Houses</a></li>
+                <li><a href="newhouse.html">New House</a></li>
+              </ul>
+            </li>
 
             <li class="submenu">
               <a href="#">
@@ -113,18 +125,18 @@
         <div class="row">
           <div class="content-box-large box-with-header">
             <div class="panel-heading">
-              <div class="panel-title">System Users</div>
+              <div class="panel-title">All Broods</div>
             </div>
             <div class="panel-body">
 
-              <form action = "viewusers.php" method = "post">
-
-                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="systemusers">
+                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="broods">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Role</th>
-                      <th>Username</th>
+                      <th>Date</th>
+                      <th>Initial Size</th>
+                      <th>Current Size</th>
+                      <th>House Assigned</th>
+                      <th>Status</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -147,22 +159,46 @@
                       die ("Failed to establish DB connection:". $con->connect_error);
                     }
 
-                    $result = $con->query("SELECT `UserID`,`FirstName`, `LastName`, `Category`, `Username` FROM Users");
+                    $result = $con->query("SELECT`BroodID`, `Date`,`InitialSize`, `CurrentSize`, `HouseAssigned`, `Status` FROM Brood");
 
                     while($row = $result->fetch_assoc()){
                       echo "<tr>";
-                      echo "<td>".$row['FirstName']. " ".$row['LastName']."</td>";
-                      echo "<td>".$row['Category']."</td>";
-                      echo "<td>".$row['Username']."</td>";
+                      echo "<td>".$row['Date']."</td>";
+                      echo "<td>".$row['InitialSize']."</td>";
+                      echo "<td>".$row['CurrentSize']."</td>";
+                      if ($row['HouseAssigned'] == 0){ ?>
+                        <td>
+                          <form method="post" action="houseselector.php">
+                            <input type="submit" name="assign" value="Assign House"/>
+                            <input type="hidden" name="broodID" value="<?php echo $row['BroodID']; ?>"/>
+                          </form>
+                        </td>
+                        <!-- // echo "<td>"."Unassigned"."</td>"; -->
+                        <?php
+                      }else{
+                        $housenames = $con->query("SELECT hseName FROM Houses where hse_ID = '$row[HouseAssigned]'");
+                        $fetched = $housenames->fetch_assoc();
+                        ?>
+                        <td>
+                          <form method="post" action="houseselector.php">
+                            <input type="submit" name="assign" value="<?php echo $fetched['hseName']; ?>"/>
+                            <input type="hidden" name="broodID" value="<?php echo $row['BroodID']; ?>"/>
+                          </form>
+                        </td>
+
+                        <?php
+                      }
+                      if ($row['Status'] == 0){
+                        echo "<td>"."Available"."</td>";
+                      }else{
+                        echo "<td>"."Sold"."</td>";
+                      }
                       ?>
                       <td>
-                        <form method="post" action="edit_deleteuser.php">
-                          <input type="submit" name="modifyusers" value="Edit"/>
-                          <input type="submit" name="modifyusers" value="Delete"/>
-                          <input type="submit" name="modifyusers" value="Reset password"/>
-                          <input type="hidden" name="userID" value="<?php echo $row['UserID']; ?>"/>
+                        <form method="post" action="deletebrood.php">
+                          <input type="submit" name="delete" value="Delete"/>
+                          <input type="hidden" name="broodID" value="<?php echo $row['BroodID']; ?>"/>
                         </form>
-
                       </td>
                       <?php
                       echo "</tr>";
@@ -170,16 +206,13 @@
                     ?>
                     <tr>
                       <td>
-                        <form method="post" action="createUser.html">
-                          <input type="submit" name="newuser" value="New"/>
+                        <form method="post" action="newbrood.html">
+                          <input type="submit" name="newbrood" value="New"/>
                         </form>
                       </td>
                     </tr>
-
                   </tbody>
                 </table>
-              </form>
-
             </div>
           </div>
         </div>

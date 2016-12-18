@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Users</title>
+  <title>Mortality Report</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- styles -->
   <link href="css/styles.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script src="js/Chart.min.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -54,7 +54,6 @@
           <ul class="nav">
             <!-- Main menu -->
             <li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-
             <li class="submenu">
               <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Users
@@ -66,19 +65,6 @@
                 <li><a href="createUser.html">Create New</a></li>
               </ul>
             </li>
-
-            <li class="submenu">
-							<a href="#">
-								<i class="glyphicon glyphicon-list"></i> Houses
-								<span class="caret pull-right"></span>
-							</a>
-							<!-- Sub menu -->
-							<ul>
-								<li><a href="viewhouses.php">View Houses</a></li>
-								<li><a href="newhouse.html">New House</a></li>
-							</ul>
-						</li>
-
             <li class="submenu">
               <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Reports
@@ -98,8 +84,8 @@
               </a>
               <!-- Sub menu -->
               <ul>
-                <li><a href="mortalityADMIN.php">Mortality</a></li>
-                <li><a href="feedConsumptionADMIN.php">Feed Consumption</a></li>
+                <li><a href="mortalityADMIN.html">Mortality</a></li>
+                <li><a href="feedConsumptionADMIN.html">Feed Consumption</a></li>
                 <li><a href="expenditure.html">Expenditure</a></li>
               </ul>
             </li>
@@ -107,85 +93,94 @@
           </ul>
         </div>
       </div>
+      <div class="col-md-6">
+        <div class="content-box-large">
+          <div class="panel-heading">
+            <div class="panel-title">Feed Consumption Record, please fill all fields</div>
+          </div>
+          <div class="panel-body">
+            <form onclick="validateNumberFields()" action = "feedConsumption.php" method = "post" name = "feedConsumption">
+              <fieldset>
+                <div class="form-group">
+                  <label>Date</label>
+                  <input id = "datefield" class ="form-control" type="date" name="date">
+                </div>
+                <div class = "form-group">
+                  <label>Feed Type</label>
+                  <p>
+                    <select class="selectpicker" name = "feedType">
+                      <option value = "Starter">Starter</option>
+                      <option value = "Grower">Grower</option>
+                      <option value = "Finisher">Finisher</option>
+                    </select>
+                  </p>
+                </div>
+                <div class = "form-group">
+                  <label>House</label>
+                  <p>
+                    <select class="selectpicker" name = "houseSelector">
+                      <option value="Hse1">Hse1</option>
+                      <option value="Hse2">Hse2</option>
+                      <option value="Hse3">Hse3</option>
+                    </select>
+                  </p>
+                </div>
+                <div class="form-group">
+                  <label>Amount in Kgs</label>
+                  <input class="form-control" type="text" name = "amount" required>
+                </div>
+                <div class="form-group">
+                  <label>Remarks</label>
+                  <textarea class="form-control" rows="3" name = "remark"></textarea>
+                </div>
 
-
-      <div class="col-md-10">
-        <div class="row">
-          <div class="content-box-large box-with-header">
-            <div class="panel-heading">
-              <div class="panel-title">System Users</div>
-            </div>
-            <div class="panel-body">
-
-              <form action = "viewusers.php" method = "post">
-
-                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="systemusers">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Role</th>
-                      <th>Username</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <?php
-                    if(isset($_GET['Message'])){
-                      ?>
-                      <div id='alert'><div class=' alert alert-block alert-info fade in center'><?php echo $_GET['Message']?></div></div>
-                      <?php
-                    }
-                    $server = "localhost";
-                    $user = "root";
-                    $password = "48285";
-                    $database = "BroilerFarmManagementSystem";
-
-                    $con= new mysqli ($server,$user,$password, $database);
-
-                    if ($con->connect_error){
-                      die ("Failed to establish DB connection:". $con->connect_error);
-                    }
-
-                    $result = $con->query("SELECT `UserID`,`FirstName`, `LastName`, `Category`, `Username` FROM Users");
-
-                    while($row = $result->fetch_assoc()){
-                      echo "<tr>";
-                      echo "<td>".$row['FirstName']. " ".$row['LastName']."</td>";
-                      echo "<td>".$row['Category']."</td>";
-                      echo "<td>".$row['Username']."</td>";
-                      ?>
-                      <td>
-                        <form method="post" action="edit_deleteuser.php">
-                          <input type="submit" name="modifyusers" value="Edit"/>
-                          <input type="submit" name="modifyusers" value="Delete"/>
-                          <input type="submit" name="modifyusers" value="Reset password"/>
-                          <input type="hidden" name="userID" value="<?php echo $row['UserID']; ?>"/>
-                        </form>
-
-                      </td>
-                      <?php
-                      echo "</tr>";
-                    }
-                    ?>
-                    <tr>
-                      <td>
-                        <form method="post" action="createUser.html">
-                          <input type="submit" name="newuser" value="New"/>
-                        </form>
-                      </td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </form>
-
-            </div>
+              </fieldset>
+              <input type="submit" class = "btn btn-primary signup" value="Submit" ></tab>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <footer>
+    <div class="container">
+
+      <div class="copy text-center">
+        Copyright 2014 <a href='#'>Website</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  if(dd<10){
+    dd='0'+dd
+  }
+  if(mm<10){
+    mm='0'+mm
+  }
+
+  today = yyyy+'-'+mm+'-'+dd;
+  document.getElementById("datefield").setAttribute("max", today);
+  document.getElementById("datefield").setAttribute("min", today);
+  document.getElementById("datefield").setAttribute("value", today);
+  </script>
+  <script>
+  function validateNumberFields() {
+    var x = document.feedConsumption.amount.value;
+    if (/[^\d\.]/.test(x)) {
+      alert("Amount of food in Kgs must be a number");
+      document.feedConsumption.amount.focus();
+      document.feedConsumption.amount.style.borderColor = "red";
+      return false;
+    }
+  }
+  </script>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://code.jquery.com/jquery.js"></script>

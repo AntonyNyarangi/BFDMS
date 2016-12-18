@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Create User</title>
+	<title>New Brood</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap -->
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -115,34 +115,24 @@
 			<div class="col-md-6">
 				<div class="content-box-large">
 					<div class="panel-heading">
-						<div class="panel-title">New User Details</div>
+						<div class="panel-title">Brood registration, enter details below.</div>
 					</div>
 					<div class="panel-body">
-						<form action="createuser.php" method="post" name="newuser" required>
+						<form action="newbrood.php" method="post" name="newbrood" required>
 							<fieldset>
-								<div class="form-group">
-									<label>First Name</label>
-									<input class="form-control" type="text" name="firstname" required>
+
+                <div class="form-group">
+									<label>Date (Day they were brought to the farm)</label>
+									<input class ="form-control" id="datefield" type="date" name="date" max = "11" required>
 								</div>
+
 								<div class="form-group">
-									<label>Last Name</label>
-									<input class="form-control" type="text" name="lastname" required>
+									<label>Number of birds</label>
+									<input class="form-control" type="number" name="size" required>
 								</div>
-								<div class="form-group">
-									<label>Username</label>
-									<input class="form-control" type="text" name="username" required>
-								</div>
-								<div class="form-group">
-									<label>Category</label>
-									<p>
-										<select class="selectpicker" name="category" required>
-											<option value="Manager">Manager</option>
-											<option value="Worker">Worker</option>
-										</select>
-									</p>
-								</div>
+
 							</fieldset>
-							<input type="submit" class="btn btn-primary signup" value="Create"></tab>
+							<input type="submit" class="btn btn-primary signup" value="Submit"></tab>
 						</form>
 					</div>
 				</div>
@@ -152,7 +142,21 @@
 		</div>
 	</div>
 
+  <script>
+  	var today = new Date();
+  	var dd = today.getDate();
+  	var mm = today.getMonth()+1; //January is 0!
+  	var yyyy = today.getFullYear();
+  	if(dd<10){
+  		dd='0'+dd
+  	}
+  	if(mm<10){
+  		mm='0'+mm
+  	}
 
+  	today = yyyy+'-'+mm+'-'+dd;
+  	document.getElementById("datefield").setAttribute("value", today);
+  </script>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://code.jquery.com/jquery.js"></script>

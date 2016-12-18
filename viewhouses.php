@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mortality Report</title>
+  <title>Houses</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- styles -->
   <link href="css/styles.css" rel="stylesheet">
-  <script src="js/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -78,7 +78,7 @@
 								<li><a href="newhouse.html">New House</a></li>
 							</ul>
 						</li>
-            
+
             <li class="submenu">
               <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Reports
@@ -107,108 +107,90 @@
           </ul>
         </div>
       </div>
+
+
       <div class="col-md-10">
         <div class="row">
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="content-box-header">
-                  <div class="panel-title">Mortality</div>
-                </div>
-                <div class="content-box-large box-with-header">
-                  <canvas id="myChart" width="400" height="400"></canvas>
-                  <script>
-                  var ctx = document.getElementById("myChart");
-                  var myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                      labels: ["Day1", "Day2", "Day3", "Day4", "Day5", "Day6"],
-                      datasets: [{
-                        label: '# of dead birds',
-                        data: [6, 7, 6, 5, 2, 3],
-                        backgroundColor: [
-                          'red','red','red','red','red','red',],
-                        }]
-                      },
-                      options: {
-                        scales: {
-                          yAxes: [{
-                            ticks: {
-                              beginAtZero:true
-                            }
-                          }]
-                        }
+          <div class="content-box-large box-with-header">
+            <div class="panel-heading">
+              <div class="panel-title">Houses</div>
+            </div>
+            <div class="panel-body">
+
+              <form action = "viewhouses.php" method = "post">
+
+                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="houses">
+                  <thead>
+                    <tr>
+                      <th>House Name</th>
+                      <th>Max Capacity</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <?php
+                    if(isset($_GET['Message'])){
+                      ?>
+                      <div id='alert'><div class=' alert alert-block alert-info fade in center'><?php echo $_GET['Message']?></div></div>
+                      <?php
+                    }
+                    $server = "localhost";
+                    $user = "root";
+                    $password = "48285";
+                    $database = "BroilerFarmManagementSystem";
+
+                    $con= new mysqli ($server,$user,$password, $database);
+
+                    if ($con->connect_error){
+                      die ("Failed to establish DB connection:". $con->connect_error);
+                    }
+
+                    $result = $con->query("SELECT`hse_ID`, `hseName`,`max_Capacity`, `Status` FROM Houses");
+
+                    while($row = $result->fetch_assoc()){
+                      echo "<tr>";
+                      echo "<td>".$row['hseName']."</td>";
+                      echo "<td>".$row['max_Capacity']."</td>";
+                      if ($row['Status'] == 0){
+                        echo "<td>"."Vacant"."</td>";
+                      }else{
+                        echo "<td>"."Occupied"."</td>";
                       }
-                    });
-                    </script>
-                  </div>
-                </div>
-              </div>
+                      ?>
+                      <td>
+                        <form method="post" action="deletehouse.php">
+                          <input type="submit" name="modifyhouses" value="Delete"/>
+                          <input type="hidden" name="houseID" value="<?php echo $row['hse_ID']; ?>"/>
+                        </form>
+                      </td>
+                      <?php
+                      echo "</tr>";
+                    }
+                    ?>
+                    <tr>
+                      <td>
+                        <form method="post" action="newhouse.html">
+                          <input type="submit" name="newhouse" value="New"/>
+                        </form>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+
             </div>
-
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="content-box-header">
-                    <div class="panel-title">Mortality Statistics</div>
-                  </div>
-                  <div class="content-box-large box-with-header">
-
-                    <table class="table">
-    				              <thead>
-    				                <tr>
-    				                  <th>#</th>
-    				                  <th>First Name</th>
-    				                  <th>Last Name</th>
-    				                  <th>Username</th>
-    				                </tr>
-    				              </thead>
-    				              <tbody>
-    				                <tr>
-    				                  <td>1</td>
-    				                  <td>Mark</td>
-    				                  <td>Otto</td>
-    				                  <td>@mdo</td>
-    				                </tr>
-    				                <tr>
-    				                  <td>2</td>
-    				                  <td>Jacob</td>
-    				                  <td>Thornton</td>
-    				                  <td>@fat</td>
-    				                </tr>
-    				                <tr>
-    				                  <td>3</td>
-    				                  <td>Larry</td>
-    				                  <td>the Bird</td>
-    				                  <td>@twitter</td>
-    				                </tr>
-    				              </tbody>
-    				            </table>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <footer>
-      <div class="container">
-
-        <div class="copy text-center">
-          Copyright 2014 <a href='#'>Website</a>
-        </div>
-
-      </div>
-    </footer>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/custom.js"></script>
-  </body>
-  </html>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/custom.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<!-- styles -->
 	<link href="css/styles.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script src="js/Chart.min.js"></script>
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -54,6 +54,7 @@
 					<ul class="nav">
 						<!-- Main menu -->
 						<li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+
 						<li class="submenu">
 							<a href="#">
 								<i class="glyphicon glyphicon-list"></i> Users
@@ -65,6 +66,19 @@
 								<li><a href="createUser.html">Create New</a></li>
 							</ul>
 						</li>
+
+						<li class="submenu">
+							<a href="#">
+								<i class="glyphicon glyphicon-list"></i> Houses
+								<span class="caret pull-right"></span>
+							</a>
+							<!-- Sub menu -->
+							<ul>
+								<li><a href="viewhouses.php">View Houses</a></li>
+								<li><a href="newhouse.html">New House</a></li>
+							</ul>
+						</li>
+
 						<li class="submenu">
 							<a href="#">
 								<i class="glyphicon glyphicon-list"></i> Reports
@@ -84,8 +98,8 @@
 							</a>
 							<!-- Sub menu -->
 							<ul>
-								<li><a href="mortality.html">Mortality</a></li>
-								<li><a href="feedConsumption.html">Feed Consumption</a></li>
+								<li><a href="mortalityADMIN.html">Mortality</a></li>
+								<li><a href="feedConsumptionADMIN.html">Feed Consumption</a></li>
 								<li><a href="expenditure.html">Expenditure</a></li>
 							</ul>
 						</li>

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Create User</title>
+	<title>New House</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap -->
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
 				<div class="col-md-5">
 					<!-- Logo -->
 					<div class="logo">
-						<h1><a href="index.html">Farm Manager's Portal</a></h1>
+						<h1><a href="index.html">Management Portal</a></h1>
 					</div>
 				</div>
 				<div class="col-md-5">
@@ -34,12 +34,8 @@
 					<div class="navbar navbar-inverse" role="banner">
 						<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
 							<ul class="nav navbar-nav">
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
-									<ul class="dropdown-menu animated fadeInUp">
-										<li><a href="profile.html">Profile</a></li>
-										<li><a href="login.html">Logout</a></li>
-									</ul>
+                <li>
+									<a ><li><a href="login.html">Logout</a></li></a>
 								</li>
 							</ul>
 						</nav>
@@ -65,11 +61,11 @@
 							<!-- Sub menu -->
 							<ul>
 								<li><a href="viewusers.php">View Users</a></li>
-								<li><a href="createUser.html">Create New</a></li>
+								<li><a href="createUser.html">New User</a></li>
 							</ul>
 						</li>
 
-						<li class="submenu">
+            <li class="submenu">
 							<a href="#">
 								<i class="glyphicon glyphicon-list"></i> Houses
 								<span class="caret pull-right"></span>
@@ -115,44 +111,27 @@
 			<div class="col-md-6">
 				<div class="content-box-large">
 					<div class="panel-heading">
-						<div class="panel-title">New User Details</div>
+						<div class="panel-title">New House Details</div>
 					</div>
 					<div class="panel-body">
-						<form action="createuser.php" method="post" name="newuser" required>
+						<form action="newhouse.php" method="post" name="newhouse" required>
 							<fieldset>
 								<div class="form-group">
-									<label>First Name</label>
-									<input class="form-control" type="text" name="firstname" required>
+									<label>House Name</label>
+									<input class="form-control" type="text" name="housename" required>
 								</div>
 								<div class="form-group">
-									<label>Last Name</label>
-									<input class="form-control" type="text" name="lastname" required>
-								</div>
-								<div class="form-group">
-									<label>Username</label>
-									<input class="form-control" type="text" name="username" required>
-								</div>
-								<div class="form-group">
-									<label>Category</label>
-									<p>
-										<select class="selectpicker" name="category" required>
-											<option value="Manager">Manager</option>
-											<option value="Worker">Worker</option>
-										</select>
-									</p>
+									<label>Capacity</label>
+									<input class="form-control" type="number" name="capacity" required>
 								</div>
 							</fieldset>
-							<input type="submit" class="btn btn-primary signup" value="Create"></tab>
+							<input type="submit" class="btn btn-primary signup" value="Submit"></tab>
 						</form>
 					</div>
 				</div>
 			</div>
-
-
 		</div>
 	</div>
-
-
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://code.jquery.com/jquery.js"></script>

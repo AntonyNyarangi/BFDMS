@@ -16,7 +16,7 @@ body {
 /* Footer */
 
 footer{
-   background-color:#2c3742;
+   background-color:#0E0B16;
    box-shadow:inset 0px 0px 3px #111;
    color:#fff;
    font-size:14px;
@@ -58,7 +58,7 @@ footer .copy{
 
 .header{
    height:50px;
-   background-color: #2c3742;
+   background-color: #0E0B16;
 }
 
 .header .logo h1{
@@ -132,12 +132,12 @@ footer .copy{
 }
 
 .header .navbar-toggle{
-   background-color: #1dc1da !important;
+   background-color: #0E0B16 !important;
    border:1px solid #0fa6bc !important;
 }
 
 .header .navbar-toggle:hover, .header .navbar-toggle:focus {
-   background-color: #0fa6bc !important;
+   background-color: #0E0B16 !important;
    border:1px solid #0fa6bc !important;
 }
 
@@ -173,7 +173,7 @@ footer .copy{
 
 .header .dropdown-big .dropdown-head{
    padding:7px 15px;
-   background:#fcfcfc;
+   background:#0E0B16;
    border-bottom:1px solid #ddd;
    margin-top:-5px;
    border-top-left-radius:5px;
@@ -192,7 +192,7 @@ footer .copy{
 
 .header .dropdown-big .dropdown-foot{
    padding:7px 15px;
-   background:#fcfcfc;
+   background:#0E0B16;
    border-top:1px solid #ddd;
    margin-bottom:-5px;
    border-bottom-left-radius:5px;
@@ -386,7 +386,7 @@ footer .copy{
 }
 
 body {
-  background-color: #D8D8D8;
+  background-color: #D5D5D5;
 }
 
 /** Login & Signup **/
@@ -606,7 +606,7 @@ body {
       padding-bottom:10px;
    }
    .header .navbar .nav > li > a:hover{
-      background:#0fa6bc;
+      background-color:#404040;
       border-radius:5px;
    }
    .navbar-toggle {
