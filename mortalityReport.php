@@ -121,7 +121,7 @@ $getinitialandcurrent = "SELECT Houses.hseName, Brood.InitialSize, SUM(Mortality
               </a>
               <!-- Sub menu -->
               <ul>
-                <li><a href="mortalityReport.html">Mortality</a></li>
+                <li><a href="mortalityReport.php">Mortality</a></li>
                 <li><a href="feedConsumptionReport.html">Feed Consumption</a></li>
                 <li><a href="signup.html">Expenditure</a></li>
               </ul>
