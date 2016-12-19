@@ -85,7 +85,7 @@ if ($con->connect_error){
               </a>
               <!-- Sub menu -->
               <ul>
-                <li><a href="mortality.html">Mortality</a></li>
+                <li><a href="mortality.php">Mortality</a></li>
                 <li><a href="feedConsumption.html">Feed Consumption</a></li>
                 <!--li><a href="weight.html">Weight</a></li-->
               </ul>

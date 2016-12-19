@@ -1,3 +1,28 @@
+<?php
+//create server and database connection constants
+$server = "localhost";
+$user = "root";
+$password = "48285";
+$database = "BroilerFarmManagementSystem";
+
+$con= new mysqli ($server,$user,$password, $database);
+
+//Check server connection
+if ($con->connect_error){
+	die ("Failed to establish DB connection:". $con->connect_error);
+}
+
+$getmortalitybyhouse = "SELECT Houses.hseName, SUM(Mortality.number) as total FROM Mortality INNER JOIN Houses on Mortality.hse_ID = Houses.hse_ID GROUP BY Mortality.hse_ID";
+$result = $con->query($getmortalitybyhouse);
+
+$getnumberoflivebirdsperhouse = "SELECT Houses.hseName, Brood.CurrentSize FROM Brood INNER JOIN Houses on Brood.HouseAssigned = Houses.hse_ID GROUP BY Brood.HouseAssigned";
+$result2 = $con->query($getnumberoflivebirdsperhouse);
+
+$getinitialandcurrent = "SELECT Houses.hseName, Brood.InitialSize, SUM(Mortality.number) as mortality FROM Brood INNER JOIN Mortality INNER JOIN Houses on Brood.HouseAssigned = Mortality.hse_ID = Houses.hse_ID GROUP BY "
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +51,7 @@
 				<div class="col-md-5">
 					<!-- Logo -->
 					<div class="logo">
-						<h1><a href="fwDashboard.html">Farm Worker Portal</a></h1>
+						<h1><a href="fwDashboard.php">Farm Worker Portal</a></h1>
 					</div>
 				</div>
 				<div class="col-md-5">
@@ -52,7 +77,7 @@
 				<div class="sidebar content-box" style="display: block;">
 					<ul class="nav">
 						<!-- Main menu -->
-						<li><a href="fwDashboard.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+						<li><a href="fwDashboard.php"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
 						<li class="submenu">
 							<a href="#">
 								<i class="glyphicon glyphicon-list"></i>Forms
@@ -76,7 +101,7 @@
 							<div class="col-md-12">
 								<div class="content-box-large box-with-header">
 									<!-- <div class="panel-heading"> -->
-										<div class="panel-title">Calendar of Events</div>
+									<div class="panel-title">Calendar of Events</div>
 									<!-- </div> -->
 									<div class="panel-body">
 										<iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showTz=0&amp;height=500&amp;wkst=1&amp;bgcolor=%23ccccff&amp;src=4npjbk00ff85he8ra7qjijgh0o%40group.calendar.google.com&amp;color=%23060D5E&amp;ctz=Africa%2FNairobi" style="border:solid 1px #777" width="1000" height="450" frameborder="0" scrolling="no"></iframe>
@@ -91,9 +116,27 @@
 								<div class="panel-title">Mortality per House</div>
 							</div>
 							<div class="panel-body">
-								Mortality per House<br/>
-								Percentages <br/>
-								Total Birds Alive per House <br/>
+								<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>House</th>
+											<th>Total Mortality</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										while ($row = $result->fetch_assoc()) {
+											# code...
+											echo "<tr>";
+											echo "<td>".$row['hseName']."</td>";
+											echo "<td>".$row['total']."</td>";
+											echo "</tr>";
+										}
+										?>
+									</tbody>
+								</table>
+								<b>Percentage Mortality: </b>
+								<?php echo " "; ?>
 								<br /><br />
 							</div>
 						</div>
@@ -104,23 +147,26 @@
 								<div class="panel-title">Live Birds per House</div>
 							</div>
 							<div class="panel-body">
-								Mortality per House<br/>
-								Percentages <br/>
-								Total Birds Alive per House <br/>
+								<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>House</th>
+											<th>Live Birds</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										while ($row2 = $result2->fetch_assoc()) {
+											# code...
+											echo "<tr>";
+											echo "<td>".$row2['hseName']."</td>";
+											echo "<td>".$row2['CurrentSize']."</td>";
+											echo "</tr>";
+										}
+										?>
+									</tbody>
+								</table>
 								<br/><br/>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="content-box-large">
-							<div class="panel-heading">
-								<div class="panel-title">Percentages</div>
-							</div>
-							<div class="panel-body">
-								Mortality per House<br/>
-								Percentages <br/>
-								Total Birds Alive per House <br/>
-								<br /><br />
 							</div>
 						</div>
 					</div>

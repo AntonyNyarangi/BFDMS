@@ -31,7 +31,7 @@ if ($con->connect_error){
 				if ($row['Category'] == 'Manager'){
 					header('Location: index.html');
 				} else {
-					header('Location: fwDashboard.html');
+					header('Location: fwDashboard.php');
 				}
 
 			}
