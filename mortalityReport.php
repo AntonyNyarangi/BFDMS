@@ -161,10 +161,11 @@ $getinitialandcurrent = "SELECT Houses.hseName, Brood.InitialSize, SUM(Mortality
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6" id = "MortalityTable">
             <div class="row">
               <div class="col-md-12">
                 <div class="content-box-header">
+                  <button class = "btn btn-default" onclick = "printcontent('MortalityTable')">Print table</button>
                   <div class="panel-title">Mortality Statistics</div>
                 </div>
                 <div class="content-box-large box-with-header">
@@ -221,5 +222,6 @@ $getinitialandcurrent = "SELECT Houses.hseName, Brood.InitialSize, SUM(Mortality
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/Chart.min.js"></script>
   <script type="text/javascript" src="js/mortalityGraph.js"></script>
+  <script type = "text/javascript" src = "js/printcontent.js"></script>
 </body>
 </html>
