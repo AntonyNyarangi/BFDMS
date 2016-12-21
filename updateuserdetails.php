@@ -18,18 +18,18 @@ $lname = trim($_POST['lastname']);
 $usrname = trim($_POST['username']);
 $category = trim($_POST['category']);
 
-// echo $fname;
+// echo $userID;
 
 //update Brood
-$sqlupdate = "UPDATE `Users` SET `FirstName` = '$fname', `LastName` = '$lname', `Username` = '$usrname', `Category` = '$category' WHERE `Users`.`UserID` = '$userID'";
+$update = "UPDATE `Users` SET `FirstName` = '$fname', `LastName` = '$lname', `Username` = '$usrname', `Category` = '$category' WHERE `Users`.`UserID` = '$userID'";
 
 
-if ($con->query($sqlupdate)=== TRUE){
+if ($con->query($update)){
   $successfulMsg = "User details updated";
   header("Location:viewusers.php?Message=".$successfulMsg);
 }else{
   $errorMsg = "An error occured, user details not updated";
-  echo "Error: " . $sqlupdate . "<br>" . $con->error;
+  echo "Error: " . $update . "<br>" . $con->error;
   header("Location: viewusers.php?Message=".$errorMsg);
 }
 ?>

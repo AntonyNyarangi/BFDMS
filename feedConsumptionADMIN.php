@@ -1,7 +1,27 @@
+<?php
+//create server and database connection constants
+$server = "localhost";
+$user = "root";
+$password = "48285";
+$database = "BroilerFarmManagementSystem";
+
+$con= new mysqli ($server,$user,$password, $database);
+
+//Check server connection
+if ($con->connect_error){
+  die ("Failed to establish DB connection:". $con->connect_error);
+}else{
+
+
+  $houses = $con->query("SELECT * FROM Houses");
+  $feedtypes = $con->query("SELECT * FROM Feed");
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mortality Report</title>
+  <title>Feed Consumption Entry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -78,6 +98,20 @@
                 <li><a href="createUser.html">Create New</a></li>
               </ul>
             </li>
+
+            <li class="submenu">
+							<a href="#">
+								<i class="glyphicon glyphicon-list"></i> Houses
+								<span class="caret pull-right"></span>
+							</a>
+							<!-- Sub menu -->
+							<ul>
+								<li><a href="viewhouses.php">View Houses</a></li>
+								<li><a href="newhouse.html">New House</a></li>
+							</ul>
+						</li>
+
+
             <li class="submenu">
               <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Reports
@@ -87,7 +121,6 @@
               <ul>
                 <li><a href="mortalityReport.php">Mortality</a></li>
                 <li><a href="feedConsumptionReport.html">Feed Consumption</a></li>
-                <li><a href="signup.html">Expenditure</a></li>
               </ul>
             </li>
             <li class="submenu">
@@ -99,7 +132,6 @@
               <ul>
                 <li><a href="mortalityADMIN.html">Mortality</a></li>
                 <li><a href="feedConsumptionADMIN.html">Feed Consumption</a></li>
-                <li><a href="expenditure.html">Expenditure</a></li>
               </ul>
             </li>
 
@@ -122,9 +154,11 @@
                   <label>Feed Type</label>
                   <p>
                     <select class="selectpicker" name = "feedType">
-                      <option value = "Starter">Starter</option>
-                      <option value = "Grower">Grower</option>
-                      <option value = "Finisher">Finisher</option>
+                      <?php
+                      while($fetchedfeedtypes = $feedtypes->fetch_assoc()){ ?>
+                        <option value ="<?php echo $fetchedfeedtypes['feed_ID']; ?>"><?php echo $fetchedfeedtypes['feed_Type']; ?></option>
+                        <?php  }
+                        ?>
                     </select>
                   </p>
                 </div>
@@ -132,9 +166,11 @@
                   <label>House</label>
                   <p>
                     <select class="selectpicker" name = "houseSelector">
-                      <option value="Hse1">Hse1</option>
-                      <option value="Hse2">Hse2</option>
-                      <option value="Hse3">Hse3</option>
+                      <?php
+                      while($fetchedhouses = $houses->fetch_assoc()){ ?>
+                        <option value ="<?php echo $fetchedhouses['hse_ID']; ?>"><?php echo $fetchedhouses['hseName']; ?></option>
+                        <?php  }
+                        ?>
                     </select>
                   </p>
                 </div>

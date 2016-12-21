@@ -1,7 +1,27 @@
+<?php
+//create server and database connection constants
+$server = "localhost";
+$user = "root";
+$password = "48285";
+$database = "BroilerFarmManagementSystem";
+
+$con= new mysqli ($server,$user,$password, $database);
+
+//Check server connection
+if ($con->connect_error){
+  die ("Failed to establish DB connection:". $con->connect_error);
+}else{
+
+
+  $houses = $con->query("SELECT * FROM Houses");
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Farm Manager</title>
+	<title>Mortality Entry</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap -->
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -95,7 +115,6 @@
 							<ul>
 								<li><a href="mortalityReport.php">Mortality</a></li>
 								<li><a href="feedConsumptionReport.html">Feed Consumption</a></li>
-								<li><a href="signup.html">Expenditure</a></li>
 							</ul>
 						</li>
 						<li class="submenu">
@@ -107,7 +126,6 @@
 							<ul>
 								<li><a href="mortalityADMIN.html">Mortality</a></li>
 								<li><a href="feedConsumptionADMIN.html">Feed Consumption</a></li>
-								<li><a href="expenditure.html">Expenditure</a></li>
 							</ul>
 						</li>
 
@@ -135,9 +153,11 @@
 									<label>House</label>
 									<p>
 										<select class="selectpicker" name="house" required>
-											<option value="Hse1">Hse1</option>
-											<option value="Hse2">Hse2</option>
-											<option value="Hse3">Hse3</option>
+											<?php
+											while($fetchedhouses = $houses->fetch_assoc()){ ?>
+												<option value ="<?php echo $fetchedhouses['hse_ID']; ?>"><?php echo $fetchedhouses['hseName']; ?></option>
+												<?php  }
+												?>
 										</select>
 									</p>
 								</div>
@@ -163,7 +183,7 @@
 <footer>
 	<div class="container">
 		<div class="copy text-center">
-			BFMS developed by @nyarangi
+			BFDMS developed by @nyarangi
 		</div>
 	</div>
 </footer>

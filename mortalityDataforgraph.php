@@ -13,7 +13,7 @@ if ($con->connect_error){
   die ("Failed to establish DB connection:". $con->connect_error);
 }else{
 
-  $query = ("SELECT CONCAT(CONCAT(DAY(date),'/'),Month(date)) as day, number FROM Mortality ORDER BY date");
+  $query = ("SELECT CONCAT(CONCAT(hseName,' - '),CONCAT(CONCAT(DAY(date),'/'),Month(date))) as day, number FROM Mortality INNER JOIN Houses on Mortality.hse_ID = Houses.hse_ID ORDER BY date");
   $result = $con->query($query);
   $data = array();
   foreach ($result as $row){

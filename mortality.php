@@ -14,13 +14,13 @@ if ($con->connect_error){
 //receive  values from user form and trim white spaces
 $date = trim($_POST['date']);
 $number = trim($_POST['number']);
-$house = trim($_POST['house']);
+$houseID = trim($_POST['house']);
 $remark = trim($_POST['remark']);
 
-$sql0 = "SELECT hse_ID FROM Houses WHERE hseName = '$house'";
-$result = $con->query($sql0);
-$row = $result->fetch_assoc();
-$houseID = $row['hse_ID'];
+// $sql0 = "SELECT hse_ID FROM Houses WHERE hseName = '$house'";
+// $result = $con->query($sql0);
+// $row = $result->fetch_assoc();
+// $houseID = $row['hse_ID'];
 
 $sql1 = "SELECT * FROM Mortality WHERE date = '$date' AND hse_ID = '$houseID'";
 $sql1Result = $con->query($sql1);
@@ -49,4 +49,20 @@ if ($date == $resultDate && $hseID == $houseID){
 		echo "Error: " . $sql3 . "<br>" . $con->error;
 	}
 }
+
+// UPDATE R
+// SET R.status = '0'
+// FROM dbo.ProductReviews AS R
+// INNER JOIN dbo.products AS P
+//        ON R.pid = P.id
+// WHERE R.id = '17190'
+//   AND P.shopkeeper = '89137';
+
+$sql0 = "SELECT SUM(number) as totalmortalityforhouse From Mortality where Mortality.hse_ID = '$houseID'";
+$result = $con->query($sql0);
+$row = $result->fetch_assoc();
+$totalMortality = $row['totalmortalityforhouse'];
+//update broods current size
+$sqlUpdateliveBirds = "UPDATE Brood SET Brood.CurrentSize = (Brood.InitialSize - $totalMortality) WHERE Brood.HouseAssigned = $houseID";
+$con->query($sqlUpdateliveBirds);
 ?>

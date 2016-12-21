@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $.ajax({
-    url: "http://localhost/BFMS/mortalityDataforgraph.php",
+    url: "http://localhost/BFDMS/mortalityDataforgraph.php",
     method: "GET",
     success: function(data) {
       console.log(data);

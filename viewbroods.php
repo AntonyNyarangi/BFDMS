@@ -100,7 +100,6 @@
               <ul>
                 <li><a href="mortalityReport.php">Mortality</a></li>
                 <li><a href="feedConsumptionReport.html">Feed Consumption</a></li>
-                <li><a href="signup.html">Expenditure</a></li>
               </ul>
             </li>
             <li class="submenu">
@@ -112,7 +111,6 @@
               <ul>
                 <li><a href="mortalityADMIN.php">Mortality</a></li>
                 <li><a href="feedConsumptionADMIN.php">Feed Consumption</a></li>
-                <li><a href="expenditure.html">Expenditure</a></li>
               </ul>
             </li>
 

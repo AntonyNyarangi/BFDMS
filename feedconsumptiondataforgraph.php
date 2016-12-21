@@ -13,7 +13,7 @@ if ($con->connect_error){
   die ("Failed to establish DB connection:". $con->connect_error);
 }else{
 
-  $query = ("SELECT CONCAT(CONCAT(DAY(date),'/'),Month(date)) as day, amount FROM FeedConsumption ORDER BY date");
+  $query = ("SELECT CONCAT(CONCAT(hseName,' - '),CONCAT(CONCAT(DAY(date),'/'),Month(date))) as housetotalperdate, SUM(amount) as amount from FeedConsumption INNER JOIN Houses on FeedConsumption.hse_ID = Houses.hse_ID GROUP BY FeedConsumption.hse_ID , date ORDER BY date");
   $result = $con->query($query);
   $data = array();
   foreach ($result as $row){

@@ -105,19 +105,6 @@ if ($action == 'Delete'){
             <ul class="nav">
               <!-- Main menu -->
               <li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-
-              <li class="submenu">
-                <a href="#">
-                  <i class="glyphicon glyphicon-list"></i> Broods
-                  <span class="caret pull-right"></span>
-                </a>
-                <!-- Sub menu -->
-                <ul>
-                  <li><a href="viewbroods.php">View Broods</a></li>
-                  <li><a href="newbrood.html">New Brood</a></li>
-                </ul>
-              </li>
-
               <li class="submenu">
                 <a href="#">
                   <i class="glyphicon glyphicon-list"></i> Users
@@ -126,44 +113,6 @@ if ($action == 'Delete'){
                 <!-- Sub menu -->
                 <ul>
                   <li><a href="viewusers.php">View Users</a></li>
-                  <li><a href="createUser.html">Create New</a></li>
-                </ul>
-              </li>
-
-              <li class="submenu">
-                <a href="#">
-                  <i class="glyphicon glyphicon-list"></i> Houses
-                  <span class="caret pull-right"></span>
-                </a>
-                <!-- Sub menu -->
-                <ul>
-                  <li><a href="viewhouses.php">View Houses</a></li>
-                  <li><a href="newhouse.html">New House</a></li>
-                </ul>
-              </li>
-
-              <li class="submenu">
-                <a href="#">
-                  <i class="glyphicon glyphicon-list"></i> Reports
-                  <span class="caret pull-right"></span>
-                </a>
-                <!-- Sub menu -->
-                <ul>
-                  <li><a href="mortalityReport.php">Mortality</a></li>
-                  <li><a href="feedConsumptionReport.html">Feed Consumption</a></li>
-                  <li><a href="signup.html">Expenditure</a></li>
-                </ul>
-              </li>
-              <li class="submenu">
-                <a href="#">
-                  <i class="glyphicon glyphicon-list"></i> Forms
-                  <span class="caret pull-right"></span>
-                </a>
-                <!-- Sub menu -->
-                <ul>
-                  <li><a href="mortalityADMIN.php">Mortality</a></li>
-                  <li><a href="feedConsumptionADMIN.php">Feed Consumption</a></li>
-                  <li><a href="expenditure.html">Expenditure</a></li>
                 </ul>
               </li>
 
@@ -204,7 +153,7 @@ if ($action == 'Delete'){
                     </p>
                   </div>
                 </fieldset>
-                <input type="submit" class="btn btn-primary signup" value="update"></tab>
+                <input type="submit" class="btn btn-primary" value="update"></tab>
               </form>
             </div>
           </div>

@@ -13,20 +13,17 @@ if ($con->connect_error){
 }
 //receive  values from user form and trim white spaces
 $broodID = trim($_POST['broodID']);
-$hse_ID = trim($_POST['houseID']);
 
-// echo $hse_ID;
+//delete query
 
-//update Brood
-$sqlupdate = "UPDATE `Brood` SET `HouseAssigned` = '$hse_ID' WHERE `Brood`.`BroodID` = '$broodID'";
-$sqlupdate2 = "UPDATE `Houses` SET `Status` = '1' WHERE `Houses`.`hse_ID` = '$hse_ID'";
+$sql = "DELETE FROM `Brood` WHERE `BroodID` = $broodID";
 
-if ($con->query($sqlupdate)=== TRUE && $con->query($sqlupdate2)=== TRUE ){
-  $successfulMsg = "House Assigned";
+if (  $con->query("UPDATE Houses Set Houses.Status = '0'WHERE Houses.hse_ID = (SELECT HouseAssigned From Brood WHERE Brood.BroodID = $broodID)")=== TRUE && $con->query($sql)=== TRUE){
+  $successfulMsg = "Brood Deleted";
   header("Location:viewbroods.php?Message=".$successfulMsg);
 }else{
   $errorMsg = "An error occured";
-  echo "Error: " . $sqlupdate . "<br>" . $con->error;
-  header("Location: newbrood.html?Message=".$errorMsg);
+  echo "Error: " . $sql . "<br>" . $con->error;
+  echo "<script type = 'text/javascript'>alert('$errorMsg');</script>";
 }
 ?>
