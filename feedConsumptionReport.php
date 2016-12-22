@@ -1,3 +1,25 @@
+<?php
+//create server and database connection constants
+$server = "localhost";
+$user = "root";
+$password = "48285";
+$database = "BroilerFarmManagementSystem";
+
+$con= new mysqli ($server,$user,$password, $database);
+
+//Check server connection
+if ($con->connect_error){
+  die ("Failed to establish DB connection:". $con->connect_error);
+}
+
+$getconsumptionbyhouse = "SELECT Houses.hseName, SUM(FeedConsumption.amount) as total FROM FeedConsumption INNER JOIN Houses on FeedConsumption.hse_ID = Houses.hse_ID GROUP BY FeedConsumption.hse_ID";
+$result = $con->query($getconsumptionbyhouse);
+
+$getconsumptionbyType = "SELECT feed_Type, SUM(FeedConsumption.amount) as total FROM FeedConsumption INNER JOIN Feed on FeedConsumption.feed_ID = Feed.feed_ID GROUP BY Feed.feed_Type";
+$result2 = $con->query($getconsumptionbyType);
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +78,31 @@
 						<!-- Main menu -->
 						<li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
 
+            <li class="submenu">
+							<a href="#">
+								<i class="glyphicon glyphicon-list"></i> Forms
+								<span class="caret pull-right"></span>
+							</a>
+							<!-- Sub menu -->
+							<ul>
+								<li><a href="mortalityADMIN.php">Mortality</a></li>
+								<li><a href="feedConsumptionADMIN.php">Feed Consumption</a></li>
+							</ul>
+						</li>
+
+            <li class="submenu">
+              <a href="#">
+                <i class="glyphicon glyphicon-list"></i> Reports
+                <span class="caret pull-right"></span>
+              </a>
+              <!-- Sub menu -->
+              <ul>
+                <li><a href="mortalityReport.php">Mortality</a></li>
+                <li><a href="feedConsumptionReport.php">Feed Consumption</a></li>
+              </ul>
+            </li>
+
+
 						<li class="submenu">
               <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Broods
@@ -92,28 +139,7 @@
 							</ul>
 						</li>
 
-						<li class="submenu">
-							<a href="#">
-								<i class="glyphicon glyphicon-list"></i> Reports
-								<span class="caret pull-right"></span>
-							</a>
-							<!-- Sub menu -->
-							<ul>
-								<li><a href="mortalityReport.php">Mortality</a></li>
-								<li><a href="feedConsumptionReport.html">Feed Consumption</a></li>
-							</ul>
-						</li>
-						<li class="submenu">
-							<a href="#">
-								<i class="glyphicon glyphicon-list"></i> Forms
-								<span class="caret pull-right"></span>
-							</a>
-							<!-- Sub menu -->
-							<ul>
-								<li><a href="mortalityADMIN.html">Mortality</a></li>
-								<li><a href="feedConsumptionADMIN.html">Feed Consumption</a></li>
-							</ul>
-						</li>
+
 
 					</ul>
 				</div>
@@ -136,12 +162,57 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
+
+					<div class="col-md-6" id = "MortalityTable">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content-box-header">
+                  <!-- <button class = "btn btn-default" onclick = "printcontent('MortalityTable')">Print table</button> -->
+                  <div class="panel-title">Feed Consumption Statistics</div>
+                </div>
+                <div class="content-box-large box-with-header">
+
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>House</th>
+                        <th>Total Feed Consumed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      while ($row = $result->fetch_assoc()) {
+                        # code...
+                        echo "<tr>";
+                        echo "<td>".$row['hseName']."</td>";
+                        echo "<td>".$row['total']."</td>";
+                        echo "</tr>";
+                      }?>
+
+											<tr>
+                        <th>Feed Type</th>
+                        <th>Total Consumed</th>
+                      </tr>
+
+											<?php
+
+											while ($row2 = $result2->fetch_assoc()) {
+                        # code...
+                        echo "<tr>";
+                        echo "<td>".$row2['feed_Type']."</td>";
+                        echo "<td>".$row2['total']."</td>";
+                        echo "</tr>";
+											}?>
+                    </tbody>
+                  </table>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
 				</div>
-
-
-
 			</div>
 		</div>
 	</div>

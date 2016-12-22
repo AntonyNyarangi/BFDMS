@@ -70,6 +70,30 @@ if ($con->connect_error){
 						<!-- Main menu -->
 						<li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
 
+            <li class="submenu">
+							<a href="#">
+								<i class="glyphicon glyphicon-list"></i> Forms
+								<span class="caret pull-right"></span>
+							</a>
+							<!-- Sub menu -->
+							<ul>
+								<li><a href="mortalityADMIN.php">Mortality</a></li>
+								<li><a href="feedConsumptionADMIN.php">Feed Consumption</a></li>
+							</ul>
+						</li>
+
+            <li class="submenu">
+							<a href="#">
+								<i class="glyphicon glyphicon-list"></i> Reports
+								<span class="caret pull-right"></span>
+							</a>
+							<!-- Sub menu -->
+							<ul>
+								<li><a href="mortalityReport.php">Mortality</a></li>
+								<li><a href="feedConsumptionReport.php">Feed Consumption</a></li>
+							</ul>
+						</li>
+
 						<li class="submenu">
               <a href="#">
                 <i class="glyphicon glyphicon-list"></i> Broods
@@ -106,28 +130,7 @@ if ($con->connect_error){
 							</ul>
 						</li>
 
-						<li class="submenu">
-							<a href="#">
-								<i class="glyphicon glyphicon-list"></i> Reports
-								<span class="caret pull-right"></span>
-							</a>
-							<!-- Sub menu -->
-							<ul>
-								<li><a href="mortalityReport.php">Mortality</a></li>
-								<li><a href="feedConsumptionReport.html">Feed Consumption</a></li>
-							</ul>
-						</li>
-						<li class="submenu">
-							<a href="#">
-								<i class="glyphicon glyphicon-list"></i> Forms
-								<span class="caret pull-right"></span>
-							</a>
-							<!-- Sub menu -->
-							<ul>
-								<li><a href="mortalityADMIN.html">Mortality</a></li>
-								<li><a href="feedConsumptionADMIN.html">Feed Consumption</a></li>
-							</ul>
-						</li>
+
 
 					</ul>
 				</div>
