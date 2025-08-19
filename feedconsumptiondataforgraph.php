@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 $server = "localhost:3306";
 $user = "root";
-$password = "abcd1234";
+$password = "@mokaya";
 $database = "PoultryFarmManagementSystem";
 
 $con= new mysqli ($server,$user,$password, $database);
