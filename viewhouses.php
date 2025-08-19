@@ -152,8 +152,8 @@
                     }
                     $server = "localhost";
                     $user = "root";
-                    $password = "48285";
-                    $database = "BroilerFarmManagementSystem";
+                    $password = "password";
+                    $database = "PoultryFarmManagementSystem";
 
                     $con= new mysqli ($server,$user,$password, $database);
 

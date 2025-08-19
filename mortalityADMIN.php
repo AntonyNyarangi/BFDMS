@@ -2,8 +2,8 @@
 //create server and database connection constants
 $server = "localhost";
 $user = "root";
-$password = "48285";
-$database = "BroilerFarmManagementSystem";
+$password = "password";
+$database = "PoultryFarmManagementSystem";
 
 $con= new mysqli ($server,$user,$password, $database);
 
@@ -186,7 +186,7 @@ if ($con->connect_error){
 <footer>
 	<div class="container">
 		<div class="copy text-center">
-			BFDMS developed by @nyarangi
+			PFDMS 2020
 		</div>
 	</div>
 </footer>
