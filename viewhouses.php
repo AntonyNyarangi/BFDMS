@@ -87,7 +87,7 @@
               <!-- Sub menu -->
               <ul>
                 <li><a href="viewbroods.php">View Broods</a></li>
-                <li><a href="newbrood.html">New Brood</a></li>
+                <li><a href="newbrood.php">New Brood</a></li>
               </ul>
             </li>
 
@@ -150,9 +150,9 @@
                       <div id='alert'><div class=' alert alert-block alert-info fade in center'><?php echo $_GET['Message']?></div></div>
                       <?php
                     }
-                    $server = "localhost";
+                    $server = "localhost:3306";
                     $user = "root";
-                    $password = "password";
+                    $password = "abcd1234";
                     $database = "PoultryFarmManagementSystem";
 
                     $con= new mysqli ($server,$user,$password, $database);
@@ -161,12 +161,12 @@
                       die ("Failed to establish DB connection:". $con->connect_error);
                     }
 
-                    $result = $con->query("SELECT`hse_ID`, `hseName`,`max_Capacity`, `Status` FROM Houses");
+                    $result = $con->query("SELECT`hse_ID`, `hseName`,`Capacity`, `Status` FROM Houses");
 
                     while($row = $result->fetch_assoc()){
                       echo "<tr>";
                       echo "<td>".$row['hseName']."</td>";
-                      echo "<td>".$row['max_Capacity']."</td>";
+                      echo "<td>".$row['Capacity']."</td>";
                       if ($row['Status'] == 0){
                         echo "<td>"."Vacant"."</td>";
                       }else{

@@ -87,7 +87,7 @@
               <!-- Sub menu -->
               <ul>
                 <li><a href="viewbroods.php">View Broods</a></li>
-                <li><a href="newbrood.html">New Brood</a></li>
+                <li><a href="newbrood.php">New Brood</a></li>
               </ul>
             </li>
 
@@ -150,9 +150,9 @@
                       <div id='alert'><div class=' alert alert-block alert-info fade in center'><?php echo $_GET['Message']?></div></div>
                       <?php
                     }
-                    $server = "localhost";
+                    $server = "localhost:3306";
                     $user = "root";
-                    $password = "password";
+                    $password = "abcd1234";
                     $database = "PoultryFarmManagementSystem";
 
                     $con= new mysqli ($server,$user,$password, $database);
@@ -208,7 +208,7 @@
                     ?>
                     <tr>
                       <td>
-                        <form method="post" action="newbrood.html">
+                        <form method="post" action="newbrood.php">
                           <input type="submit" name="newbrood" value="New"/>
                         </form>
                       </td>

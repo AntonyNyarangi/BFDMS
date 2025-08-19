@@ -1,8 +1,8 @@
 <?php
 //create server and database connection constants
-$server = "localhost";
+$server = "localhost:3306";
 $user = "root";
-$password = "password";
+$password = "abcd1234";
 $database = "PoultryFarmManagementSystem";
 
 $con= new mysqli ($server,$user,$password, $database);
@@ -122,7 +122,7 @@ if ($con->connect_error){
                     <select class="selectpicker" name="houseID" required>
                       <?php
                       while($fetchedhouses = $availablehouses->fetch_assoc()){ ?>
-                        <option value ="<?php echo $fetchedhouses['hse_ID']; ?>"> <?php echo $fetchedhouses['hseName']." - ".$fetchedhouses['max_Capacity']; ?></option>
+                        <option value ="<?php echo $fetchedhouses['hse_ID']; ?>"> <?php echo $fetchedhouses['hseName']." - ".$fetchedhouses['Capacity']; ?></option>
                         <?php  }
                         ?>
                         <!-- <option value="Hse1">Hse1</option>

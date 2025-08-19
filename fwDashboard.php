@@ -1,8 +1,8 @@
 <?php
 //create server and database connection constants
-$server = "localhost";
+$server = "localhost:3306";
 $user = "root";
-$password = "password";
+$password = "abcd1234";
 $database = "PoultryFarmManagementSystem";
 
 $con= new mysqli ($server,$user,$password, $database);
@@ -15,7 +15,12 @@ if ($con->connect_error){
 $getmortalitybyhouse = "SELECT Houses.hseName, SUM(Mortality.number) as total FROM Mortality INNER JOIN Houses on Mortality.hse_ID = Houses.hse_ID GROUP BY Mortality.hse_ID";
 $result = $con->query($getmortalitybyhouse);
 
-$getnumberoflivebirdsperhouse = "SELECT Houses.hseName, Brood.CurrentSize FROM Brood INNER JOIN Houses on Brood.HouseAssigned = Houses.hse_ID GROUP BY Brood.HouseAssigned";
+$getnumberoflivebirdsperhouse = "
+    SELECT Houses.hseName, MAX(Brood.CurrentSize) AS CurrentSize
+    FROM Brood 
+    INNER JOIN Houses ON Brood.HouseAssigned = Houses.hse_ID 
+    GROUP BY Brood.HouseAssigned, Houses.hseName
+";
 $result2 = $con->query($getnumberoflivebirdsperhouse);
 
 $getinitialandcurrent = "SELECT Houses.hseName, Brood.InitialSize, SUM(Mortality.number) as mortality FROM Brood INNER JOIN Mortality INNER JOIN Houses on Brood.HouseAssigned = Mortality.hse_ID = Houses.hse_ID GROUP BY "

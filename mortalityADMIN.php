@@ -1,8 +1,8 @@
 <?php
 //create server and database connection constants
-$server = "localhost";
+$server = "localhost:3306";
 $user = "root";
-$password = "password";
+$password = "abcd1234";
 $database = "PoultryFarmManagementSystem";
 
 $con= new mysqli ($server,$user,$password, $database);
@@ -102,7 +102,7 @@ if ($con->connect_error){
               <!-- Sub menu -->
               <ul>
                 <li><a href="viewbroods.php">View Broods</a></li>
-                <li><a href="newbrood.html">New Brood</a></li>
+                <li><a href="newbrood.php">New Brood</a></li>
               </ul>
             </li>
 

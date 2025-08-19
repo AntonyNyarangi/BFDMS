@@ -1,8 +1,8 @@
 <?php
 //create server and database connection constants
-$server = "localhost";
+$server = "localhost:3306";
 $user = "root";
-$password = "password";
+$password = "abcd1234";
 $database = "PoultryFarmManagementSystem";
 
 $con= new mysqli ($server,$user,$password, $database);
@@ -26,7 +26,7 @@ if($result->num_rows > 0){
   $hsenameexistserror = "A House with that name already exists";
   	echo "<script type='text/javascript'>alert('$hsenameexistserror');</script>";
 }else{
-  $sqlinsert = "INSERT INTO `Houses` (`hse_ID`, `hseName`, `max_Capacity`, `Status`) VALUES (NULL, '$housename', '$capacity', '$defaultstatus')";
+  $sqlinsert = "INSERT INTO `Houses` (`hse_ID`, `hseName`, `Capacity`, `Status`) VALUES (NULL, '$housename', '$capacity', '$defaultstatus')";
   if ($con->query($sqlinsert)=== TRUE){
     $successfulMsg = "House created";
     header("Location:viewhouses.php?Message=".$successfulMsg);

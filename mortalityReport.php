@@ -1,8 +1,8 @@
 <?php
 //create server and database connection constants
-$server = "localhost";
+$server = "localhost:3306";
 $user = "root";
-$password = "password";
+$password = "abcd1234";
 $database = "PoultryFarmManagementSystem";
 
 $con= new mysqli ($server,$user,$password, $database);
@@ -12,13 +12,26 @@ if ($con->connect_error){
   die ("Failed to establish DB connection:". $con->connect_error);
 }
 
-$getmortalitybyhouse = "SELECT Houses.hseName, SUM(Mortality.number) as total FROM Mortality INNER JOIN Houses on Mortality.hse_ID = Houses.hse_ID GROUP BY Mortality.hse_ID";
+$getmortalitybyhouse = "SELECT Houses.hseName, SUM(Mortality.number) AS total FROM Mortality INNER JOIN Houses ON Mortality.hse_ID = Houses.hse_ID GROUP BY Houses.hse_ID, Houses.hseName;";
 $result = $con->query($getmortalitybyhouse);
 
-$getnumberoflivebirdsperhouse = "SELECT Houses.hseName, Brood.CurrentSize FROM Brood INNER JOIN Houses on Brood.HouseAssigned = Houses.hse_ID GROUP BY Brood.HouseAssigned";
+$getnumberoflivebirdsperhouse = "SELECT Houses.hseName,
+       SUM(Brood.CurrentSize) AS liveBirds
+FROM Brood
+INNER JOIN Houses ON Brood.HouseAssigned = Houses.hse_ID
+GROUP BY Houses.hse_ID, Houses.hseName;
+";
 $result2 = $con->query($getnumberoflivebirdsperhouse);
 
-$getinitialandcurrent = "SELECT Houses.hseName, Brood.InitialSize, SUM(Mortality.number) as mortality FROM Brood INNER JOIN Mortality INNER JOIN Houses on Brood.HouseAssigned = Mortality.hse_ID = Houses.hse_ID GROUP BY "
+$getinitialandcurrent = "SELECT Houses.hseName,
+       SUM(Brood.InitialSize) AS initialSize,
+       SUM(Mortality.number) AS mortality,
+       SUM(Brood.CurrentSize) AS currentSize
+FROM Brood
+INNER JOIN Houses ON Brood.HouseAssigned = Houses.hse_ID
+LEFT JOIN Mortality ON Mortality.hse_ID = Houses.hse_ID
+GROUP BY Houses.hse_ID, Houses.hseName;
+"
 ?>
 
 <!DOCTYPE html>
@@ -110,7 +123,7 @@ $getinitialandcurrent = "SELECT Houses.hseName, Brood.InitialSize, SUM(Mortality
               <!-- Sub menu -->
               <ul>
                 <li><a href="viewbroods.php">View Broods</a></li>
-                <li><a href="newbrood.html">New Brood</a></li>
+                <li><a href="newbrood.php">New Brood</a></li>
               </ul>
             </li>
 

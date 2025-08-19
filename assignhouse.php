@@ -1,8 +1,8 @@
 <?php
 //create server and database connection constants
-$server = "localhost";
+$server = "localhost:3306";
 $user = "root";
-$password = "password";
+$password = "abcd1234";
 $database = "PoultryFarmManagementSystem";
 
 $con= new mysqli ($server,$user,$password, $database);
@@ -27,6 +27,6 @@ if ($con->query($sqlupdate)=== TRUE && $con->query($sqlupdate2)=== TRUE ){
 }else{
   $errorMsg = "An error occured";
   echo "Error: " . $sqlupdate . "<br>" . $con->error;
-  header("Location: newbrood.html?Message=".$errorMsg);
+  header("Location: newbrood.php?Message=".$errorMsg);
 }
 ?>
