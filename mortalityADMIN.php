@@ -186,7 +186,7 @@ if ($con->connect_error){
 <footer>
 	<div class="container">
 		<div class="copy text-center">
-			PFDMS 2020
+			PFMS
 		</div>
 	</div>
 </footer>
